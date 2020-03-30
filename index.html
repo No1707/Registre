@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Attendance Register</title>
+</head>
+<body>
+    <header>
+        <h1>
+            Attendance Register
+        </h1>
+    </header>
+
+    <!-- Connection page -->
+
+    <div class="connection">
+        <input type="login" placeholder="Login" id="login">
+        <input type="password" placeholder="Password" id="password">
+        <button id="connect">Connection</button>
+        <h3><h3>not yet registered ?</h3></h3><button id="register">Registration</button>
+    </div>
+
+    <!-- Registration page -->
+
+    <div class="registration">
+        <div class="RTop">
+            <div class="RTopLeft">
+                <div><h2>Firstname :</h2><input type="text" placeholder="Firstname" id="Rfirstname"></div>
+                <div><h2>Surname :</h2><input type="text" placeholder="Surname" id="Rsurname"></div>
+                <div><h2>Mail :</h2><input type="text" placeholder="Mail" id="Rmail"></div>
+            </div>
+            <div class="RTopRight">
+                <div><h2>Login :</h2><input type="login" placeholder="Login" id="Rlogin"></div>
+                <div><h2>Password :</h2><input type="password" placeholder="Password" id="Rpwd1"></div>
+                <div><h2>Confirm password :</h2><input type="password" placeholder="Password" id="Rpwd2"></div>
+            </div>
+        </div>
+        <div class="RBot">
+            <div>
+                <input type="radio" name="role" id="Radmin"><label for="Radmin">Admin</label>
+                <input type="radio" name="role" id="Rform"><label for="Rform">Teacher</label>
+                <input type="radio" name="role" id="Rstud"><label for="Rstud">Student</label>
+            </div>
+            <div>
+                <button type="button" id="RReturn">Cancel</button>
+                <button type="button" id="RConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
