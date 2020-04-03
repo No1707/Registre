@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<form class="form form" id="addLogginForm">
+    <div class="form-group">
+        <h4>email </h4>
+            <input required type="email" class="form-control" id="Cemail" placeholder="email"><br>
+        
+            <h4>mot de passe</h4>
+            <input required type="password" class="form-control" id="Cmdp" placeholder="mdp">  
+
+
+
+        <button type="submit" class="btn btn-primary">Connection</button>
+                <a class="btn btn-primary" href="./index.html">Pas de compte</a>
+    </div>
+</form>
+<button id="bigTest">Déco</button>
+<div id="BigTest"></div>
+
+<!-- jQuery et Bootstrap-->
+<script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+
+
+<!-- SDK Firebase -->
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+<script src="realtime-database.js" type="module"></script>
+
+</body>
+</html>

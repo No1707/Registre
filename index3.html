@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emploi du temps</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- navbar gauche  -->
+    <section class="left">
+        <div class="firstDiv">
+            <i class="fas fa-users fa-3x"></i>
+            <div id="profileName">
+              <p id="tagMail"></p>
+              <p id="tagGrade">Grade</p>
+            </div>
+        </div>
+        <div class="navTable">
+            <div class="navBtns">
+              <p>test</p>
+            </div>
+            <div class="navBtns">
+              <p>test</p>
+            </div>
+            <div class="navBtns">
+              <p>test</p>
+            </div>
+            <div class="navBtns">
+              <p>test</p>
+            </div>
+        </div>
+        <div class="signOut">
+          <button id="signOutBtn">Sign out</button>
+        </div>
+    </section>
+
+<!-- --------------------------LAST ADD SEBASTIAN emploi du temps -------------------------------- -->
+<div class="col-md-6">
+  <hr>
+  <form class="form form" id="addTimeForm">
+      <h3>création d emploi du temps</h3>
+  <div class="form-group">
+          <input required type="text" class="form-control" id="matiere" placeholder="matiere">
+          <input required type="text" class="form-control" id="formateur" placeholder="formateur">
+          <h4>Durée</h4>
+          <input type="date" id='duration'class="form-control" placeholder="??/??/??" value=""><p>AU</p>
+          <input type="date" id='duration2'class="form-control" placeholder="??/??/??" value="">
+          <input required type="text" class="form-control" id="classe" placeholder="classe">
+          <!-- <h4>Elève </h4>
+          <select class="form-control" id="etudes">
+                  <option>Aucun diplôme</option>
+                  <option>Bac</option>
+                  <option>BTS</option>
+                  <option>Licence</option>
+                  <option>Master</option>
+                  <option>Ingenieur</option>
+          </select> -->
+
+      
+      <button type="submit" class="btn btn-success">Valider</button>
+     
+      
+  </div>
+  </form>
+<div><ul id="time"></ul></div>
+</div>
+
+<!-- ----------------------------------------------------------- -->
+
+
+<hr>
+    <section class="right">
+        <div class="container scheduler">
+            <div class="row">
+                <div class="col-sm cells">
+                    1
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    2
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    3
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    4
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    5
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    6
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    7
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    8
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    9
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    10
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    11
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    12
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    13
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    14
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    15
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    16
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    17
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    18
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    19
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    
+                  </div>
+                  <div class="col-sm cells">
+                    20
+                  </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+<!-- font awesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+<!-- jQuery et Bootstrap-->
+<script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- SDK Firebase -->
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+<script src="realtime-database.js" type="module"></script>
+</body>
+</html>
