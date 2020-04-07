@@ -1,6 +1,6 @@
 # Registre
 
-Le projet est lançable via un live-server.
+Le projet est lançable via un live-server. ( La page de départ est l'index 2 )
 
 Le projet est actuellement en total construction surtout niveau front-end.
 
