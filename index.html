@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>inscription</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Bootstrap CSS -->
+    <!-- SMTP JS -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -18,61 +18,33 @@
 
     
     <div class="row">
-
-        
         <div class="col-md-6">
-         
             <form class="form form" id="addUserForm">
-                <h3>nom et prenom</h3>
-            <div class="form-group">
+                <div class="form-group">
+                    <h4>Nom</h4>
                     <input required type="text" class="form-control" id="nom" placeholder="nom">
+                    <br>
+                    <h4>Prénom</h4>
                     <input required type="text" class="form-control" id="prénom" placeholder="prénom">
-                   
                     <br>
-                    <h4>email </h4>
+                    <h4>Email</h4>
                     <input required type="email" class="form-control" id="email" placeholder="email">
-                    <br>
-                    <h4>mot de passe</h4>
-                    <input required type="password" class="form-control" id="mdp" placeholder="mdp">
-                    <br>
-                    <h4>Confirmation du mot de passe</h4>
-                    <input required type="password" class="form-control" id="mdp2" placeholder="mdp2">
                     <br>
                     <h4>Grade </h4>
                     <select class="form-control" id="etudes">
-                            <option>élève</option>
-                            <option>professeur</option>
-                            <option>administration</option>
-                           
-                    </select><br>
-
-
-                
-                <button type="submit" class="btn btn-success">Valider l'inscription</button> <b>et</b>
-                <a class="btn btn-success" href="./index2.html">Connectez-vous</a>
-                
+                        <option>élève</option>
+                        <option>professeur</option>
+                    </select>
+                    <br>
+                    <button type="submit" class="btn btn-success">Valider l'inscription</button>
                 </div>
             </form>
         </div>
-
     </div>
 </main>
-<table class="testTable">
-    <tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Mail</th>
-        <th>Grade</th>
-    </tr>
-</table>
-<div class="connectedUsers" style="background-color: lightcyan;">
-
-</div>
 
 <!-- jQuery et Bootstrap-->
 <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
-
-
 <!-- SDK Firebase -->
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>

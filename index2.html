@@ -4,36 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
+    <!-- SMTP JS -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles2.css">
 </head>
 <body>
 
-<form class="form form" id="addLogginForm">
+<form class="form form"  id="checkMail">
+
     <div class="form-group">
-        <h4>email </h4>
-            <input required type="email" class="form-control" id="Cemail" placeholder="email"><br>
-        
-            <h4>mot de passe</h4>
-            <input required type="password" class="form-control" id="Cmdp" placeholder="mdp">  
 
+        <h4>Email</h4>
+        <input required type="email" class="form-control" id="Cemail" placeholder="Email"><br>
+        <button id="checkMailBtn" type="submit" class="btn btn-primary checkBtns">Confirm</button>
 
-
-        <button type="submit" class="btn btn-primary">Connection</button>
-                <a class="btn btn-primary" href="./index.html">Pas de compte</a>
     </div>
+
 </form>
-<button id="bigTest">Déco</button>
-<div id="BigTest"></div>
+
+<br>
+
+<form class="form botPart"  id="signedUp">
+
+    <div class="form-group">
+
+        <h4>Mot de passe</h4>
+        <input required type="password" class="form-control" id="signedUpPass" placeholder="Mot de passe"><br>
+        <button type="submit" class="btn btn-primary checkBtns">Confirm</button>
+
+    </div>
+
+</form>
+
+    <form class="form botPart"  id="notSignedUp">
+
+    <div class="form-group">
+
+        <h4>Mot de passe</h4>
+        <input required type="password" class="form-control" id="notSignedUpPass" placeholder="Mot de passe">
+        <br>
+        <h4>Confirmer mot de passe</h4>
+        <input required type="password" class="form-control" id="notSignedUpPass2" placeholder="Mot de passe">
+        <br>
+        <button type="submit" class="btn btn-primary checkBtns">Confirm</button>
+
+    </div>
+
+</form>
 
 <!-- jQuery et Bootstrap-->
 <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
-
-
 <!-- SDK Firebase -->
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
-<!-- <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script> -->
 <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
 <script src="realtime-database.js" type="module"></script>
 

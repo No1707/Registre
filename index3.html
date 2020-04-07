@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emploi du temps</title>
+    <!-- SMTP JS -->
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles3.css">
 </head>
 <body>
 
@@ -15,7 +17,7 @@
             <i class="fas fa-users fa-3x"></i>
             <div id="profileName">
               <p id="tagMail"></p>
-              <p id="tagGrade">Grade</p>
+              <p id="tagGrade"></p>
             </div>
         </div>
         <div class="navTable">
@@ -25,53 +27,34 @@
             <div class="navBtns">
               <p>test</p>
             </div>
-            <div class="navBtns">
-              <p>test</p>
+            <div class="navBtns" id="addCourseBtn">
+              <p>Ajouter un cours</p>
             </div>
-            <div class="navBtns">
-              <p>test</p>
+            <div class="navBtns" id="addUser">
+              <p>Ajouter utilisateur</p>
             </div>
         </div>
-        <div class="signOut">
-          <button id="signOutBtn">Sign out</button>
+        <div class="bottomNav">
+          <div class="navBtns">test</div>
+          <div class="navBtns">test</div>
+            <button id="signOutBtn">Sign out</button>
         </div>
     </section>
 
-<!-- --------------------------LAST ADD SEBASTIAN emploi du temps -------------------------------- -->
-<div class="col-md-6">
-  <hr>
-  <form class="form form" id="addTimeForm">
-      <h3>création d emploi du temps</h3>
-  <div class="form-group">
-          <input required type="text" class="form-control" id="matiere" placeholder="matiere">
-          <input required type="text" class="form-control" id="formateur" placeholder="formateur">
-          <h4>Durée</h4>
-          <input type="date" id='duration'class="form-control" placeholder="??/??/??" value=""><p>AU</p>
-          <input type="date" id='duration2'class="form-control" placeholder="??/??/??" value="">
-          <input required type="text" class="form-control" id="classe" placeholder="classe">
-          <!-- <h4>Elève </h4>
-          <select class="form-control" id="etudes">
-                  <option>Aucun diplôme</option>
-                  <option>Bac</option>
-                  <option>BTS</option>
-                  <option>Licence</option>
-                  <option>Master</option>
-                  <option>Ingenieur</option>
-          </select> -->
+    <form action="" class="displayAddCourse">
+      <input type="text" id="subject" placeholder="Matière">
+      <input type="text" id="teacher" placeholder="Professeur">
+      <input type="date" id="day" placeholder="Date">
+      <input type="time" id="startTime" placeholder="Heure de début">
+      <input type="time" id="endTime" placeholder="Heure de fin">
+      <input type="text" id="classe" placeholder="Classe">
+      <button type="submit">Ajouter</button>
+    </form>
 
-      
-      <button type="submit" class="btn btn-success">Valider</button>
-     
-      
-  </div>
-  </form>
-<div><ul id="time"></ul></div>
-</div>
 
 <!-- ----------------------------------------------------------- -->
+<!-- The tableau  -->
 
-
-<hr>
     <section class="right">
         <div class="container scheduler">
             <div class="row">
@@ -418,6 +401,9 @@
         </div>
     </section>
 
+    <!-- test display courses-->
+    <div id="displayTest">
+    </div>
 
 
 <!-- font awesome -->
@@ -425,10 +411,6 @@
 <!-- jQuery et Bootstrap-->
 <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
 <!-- SDK Firebase -->
-
-
-
-
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
