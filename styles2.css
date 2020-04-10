@@ -39,6 +39,11 @@ body{
     width: 100%;
     height: 50%;
     display: none;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+h2{
+    display: inline-block;
 }
