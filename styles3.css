@@ -1,28 +1,31 @@
 body{
     margin: 0;
-    padding: 0;
-    height: 100vh;
+    padding: 0; 
+}
+
+.topCtn{
     width: 100vw;
     display: flex;
+    margin-bottom: 200px;
 }
 
 /* Navbar gauche */
 
+.fixed{
+    position: fixed;
+    height: 100vh;
+    width: 20%;
+    z-index: 1;
+}
+
 .left{
     position: relative;
-    left: -15%;
-    transition: 0.4s ease;
     background-color: grey;
     height: 100%;
-    width: 20%;
     -webkit-box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.60);
     -moz-box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.60);
     box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.60);
     font-size: 20px;
-}
-
-.left:hover{
-    left: 0;
 }
 
 
@@ -39,7 +42,7 @@ body{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 50%;
+    height: 70%;
     padding-top: 50px;
 }
 
@@ -53,13 +56,12 @@ body{
 }
 
 .navBtns:hover{
-    background-color: lightblue;
     cursor: pointer;
-
+    background-color: lightblue;
 }
 
 .bottomNav{
-    height: 40%;
+    height: 10%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -70,29 +72,30 @@ body{
     transition: 0.3s;
     border: none;
     background-color: beige;
-    height: 15%;
+    height: 50px;
     width: 60%;
 }
 
 #signOutBtn:hover{
     border-radius: 10px;
     background-color: red;
+    color: white
 }
 
-/* Emploi du temps, etc à droite */
+/* Emploi du temps */
 
 .right{
     position: relative;
-    width: 100%;
-    height: 100%;
+    height: 100vh;
+    width: auto;
+    right: 0;
 }
 
 .scheduler{
-    border: 2px solid black;
     position: relative;
-    left: -5%;
-    top: 15%;
-    width: 70%;
+    border: 2px solid black;
+    margin: 0 50px 0 auto;
+    top: 70px;
 }
 
 .cells{
@@ -103,6 +106,7 @@ body{
 .cells:hover{
     background-color: lightblue;
 }
+
 
 /* Ajouter cours */
 
@@ -123,17 +127,63 @@ body{
     width: 50%;
 }
 
-.displayAddCourse button{
+#addd{
     border: none;
     background-color: beige;
     height: 10%;
-    width: 60%;
+    width: 30%;
+    border: 1px solid black;
+}
+
+.close{
+    position: absolute;
+    top: 15px;
+    right: 20px;
 }
 
 
 /* DISPLAY TEST */
 #displayTest{
     position: absolute;
-    top: 20%;
-    right: 5%;
+    right: 50%;
+    bottom: 0;
+}
+
+
+/* Bottom Ctn */
+
+.botCtn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+/* Tableau Classes */
+
+
+#newTable{
+    margin-right: 50px;
+    width: 70%;
+    text-align: center;
+}
+#inputAddClass{
+    display: none;
+}
+#firstRow{
+    background-color: #6B77D8;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+#firstRow select{
+    width: 80px;
+    display: inline-block;
+}
+#firstRow button{
+    margin: 0 10px;
+}
+#firstRow input{
+    width: auto;
+    display: inline;
 }

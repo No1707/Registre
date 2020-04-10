@@ -13,8 +13,23 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
 
+// TESTS 
+
+// $("#incrementTest").on("click", () => {
+//     alert("ok")
+//     db.collection("Classes").doc("dev").set({
+//         Students: +1
+//     })
+// })
+
+
+
 // Initialisation des gestionnaires d'événement
+
 //Back-end
+$("#addClassBtn").on("click", () => $("#inputAddClass").css("display","block"))
+$("#delClassBtn").on("click", delClass)
+$("#confirmAddClass").on("click", confirmAddClass)
 $('#checkMail').on("submit",checkMail);
 $('#addUserForm').on('submit', onAddUser);
 $('#notSignedUp').on('submit', newAccount);
@@ -22,22 +37,82 @@ $('#signedUp').on('submit', signIn);
 $("#signOutBtn").click(disconnect);
 $(".displayAddCourse").on("submit",addCourse)
 //Front-end
-$('.cells').click(cellClick);
-$("#addCourseBtn").click(courseDisplay)
-$("#addUser").click( () => {window.location.href = "index.html"})
+$("#selectClasses").change(displayUsers)
+$("#addCourseBtn").on("click", () => $(".displayAddCourse").css("display","flex"))
+$("#displayClasses").on("click", () => $("html, body").animate({scrollTop: $("#newTable").offset().top -100}, 600))
+$("#EDT").on("click", () => $("html, body").animate({scrollTop: $(".right").offset().top}, 600))
+$("#etudes").change( () => {if( $("#etudes").val() == "élève"){$("#displayIf").css("display","block")} else { $("#displayIf").css("display","none")}})
+$(".cancel").click( () => window.location.href = "index3.html" )
+$("#addUser").click( () => window.location.href = "index.html" )
+$('.cells').on("click", cellClick)
+$(".close").click(closeBtn)
+
 
 
 // Gérer le click des cellules de l'emploi du temps
-
 function cellClick(){
     $(this).css("background-color","red")
 }
 
+// Gérer le click du bouton close
+function closeBtn(){
+    $(this).parent().css("display","none")
+}
 
+// Affichage champs de saisi d'ajout de cours
 
-/**
- * Fonctions Back-end
- */
+function courseDisplay(){
+    $(".displayAddCourse").css("display","flex")
+}
+
+// Ajout classe database
+
+function confirmAddClass(){
+
+    const newClass = $("#addInput").val()
+
+    db.collection("Classes").doc(newClass).get().then(function(doc){
+        if(doc.exists){
+            alert("Cette classe existe déjà")
+        } else {
+            if( newClass.length >= 3 ){
+                db.collection("Classes").doc(newClass).set({
+                    Students: 0
+                }).then(function(){
+                    $("#inputAddClass").css("display","none")
+                    alert("Classe créée")
+                })
+            }
+        }
+    })
+}
+
+// Suppr class database
+
+function delClass(){
+    
+    const selectClass = $("#selectClasses").val()
+    
+    if( selectClass.length > 2 ){
+        db.collection("Classes").doc(selectClass).delete().then(function(){
+            alert("Classe supprimée")
+        }).catch(function(error){
+            alert("Check la console")
+            console.log("Error removing document: ", error);
+        })
+    }
+}
+
+// Affichage des classes créés dans le select
+
+db.collection("Classes").onSnapshot(function(querySnapshot){
+    $(".studentClass").remove()
+    querySnapshot.forEach(function(doc) {
+        $("#selectClasses").append(`
+            <option class="studentClass" value="${doc.id}">${doc.id}</option>
+        `)
+    });
+});
 
 
 
@@ -50,6 +125,7 @@ function onAddUser (event) {
     const prénom = $('#prénom').val();
     const grade = $('#etudes').val();
     const email = $('#email').val();
+    const classe = $('#classe').val();
 
         
     if( nom.length >= 2 && prénom.length >= 2){
@@ -58,35 +134,68 @@ function onAddUser (event) {
                 $('#email').css("border","2px red solid")
                 alert("Ce mail a déjà été enregistré, l'utilisateur a dû recevoir un mail l'invitant à s'inscrire.") // Coder possibilité de renvoyer un mail ici
             } else {
-                db.collection(grade).doc(email).set({
-                    Nom: nom,
-                    Prénom: prénom,
-                    Rôle: grade,
-                    Mail: email
-                })
-                .then(function () {
-                    console.log("Document successfully written!");
-                    alert("L'utilisateur a été enregistré, un mail lui a été envoyé, il se peut qu'il soit dans sa boîte Spam.")
-
-                    Email.send({
-                        Host: "smtp.gmail.com",
-                        Username : "nolanseb08@gmail.com",
-                        Password : "MkeKyou08",
-                        To : email,
-                        From : "nolanseb08@gmail.com",
-                        Subject : "Enregistrement sur le registre de Sèb & Nolan",
-                        Body : "Bonjour, un administrateur vous a enregistré sur le registre de Sèb et Nolan ! Rendez-vous à l'adresse suivante: '...'. Bienvenue !"
-                    }).then(function(){
-                        window.location.href = "index3.html"
-                    }).catch(function(error){
-                        console.log(error)
-                        alert("Une erreur s'est produite lors de l'envoi du mail, ouvrir la console.")
+                if( classe.length >= 3){
+                    db.collection(grade).doc(email).set({
+                        Nom: nom,
+                        Prénom: prénom,
+                        Rôle: grade,
+                        Mail: email,
+                        Classe: classe
+                    })
+                    .then(function () {
+                        console.log("Document successfully written!");
+                        alert("L'utilisateur a été enregistré, un mail lui a été envoyé, il se peut qu'il soit dans sa boîte Spam.")
+    
+                        Email.send({
+                            Host: "smtp.gmail.com",
+                            Username : "nolanseb08@gmail.com",
+                            Password : "MkeKyou08",
+                            To : email,
+                            From : "nolanseb08@gmail.com",
+                            Subject : "Enregistrement sur le registre de Sèb & Nolan",
+                            Body : "Bonjour, un administrateur vous a enregistré sur le registre de Sèb et Nolan ! Rendez-vous à l'adresse suivante: '...'. Bienvenue !"
+                        }).then(function(){
+                            window.location.href = "index3.html" // Coder possibilité d'ajouter d'autre utilisateurs directement
+                        }).catch(function(error){
+                            console.log(error)
+                            alert("Une erreur s'est produite lors de l'envoi du mail, ouvrir la console.")
+                        });
+                    })
+                    .catch(function (error) {
+                        console.error("Error writing document: ", error);
+                        alert("Il y a eu une erreur à l'enregistrement de l'utilisateur, ouvrir console")
                     });
-                })
-                .catch(function (error) {
-                    console.error("Error writing document: ", error);
-                    alert("Il y a eu une erreur à l'enregistrement de l'utilisateur, ouvrir console")
-                });
+                } else {
+                    db.collection(grade).doc(email).set({
+                        Nom: nom,
+                        Prénom: prénom,
+                        Rôle: grade,
+                        Mail: email
+                    })
+                    .then(function () {
+                        console.log("Document successfully written!");
+                        alert("L'utilisateur a été enregistré, un mail lui a été envoyé, il se peut qu'il soit dans sa boîte Spam.")
+    
+                        Email.send({
+                            Host: "smtp.gmail.com",
+                            Username : "nolanseb08@gmail.com",
+                            Password : "MkeKyou08",
+                            To : email,
+                            From : "nolanseb08@gmail.com",
+                            Subject : "Enregistrement sur le registre de Sèb & Nolan",
+                            Body : "Bonjour, un administrateur vous a enregistré sur le registre de Sèb et Nolan ! Rendez-vous à l'adresse suivante: '...'. Bienvenue !"
+                        }).then(function(){
+                            window.location.href = "index3.html" // Coder possibilité d'ajouter d'autre utilisateurs directement
+                        }).catch(function(error){
+                            console.log(error)
+                            alert("Une erreur s'est produite lors de l'envoi du mail, ouvrir la console.")
+                        });
+                    })
+                    .catch(function (error) {
+                        console.error("Error writing document: ", error);
+                        alert("Il y a eu une erreur à l'enregistrement de l'utilisateur, ouvrir console")
+                    });
+                }
             }
         });
     } else {
@@ -95,6 +204,7 @@ function onAddUser (event) {
         alert("Le nom ou le prénom  est / sont  trop courts")
     }
 }
+
 
 
 // Check si l'utilisateur est déjà inscrit à la connexion
@@ -106,6 +216,7 @@ function checkMail(event){
 
     const docEleve = db.collection("élève").doc(mail)
     const docProf = db.collection("professeur").doc(mail)
+    const docAdmin = db.collection("administration").doc(mail)
 
     docEleve.get().then(function(doc){
         if(doc.exists){
@@ -127,7 +238,14 @@ function checkMail(event){
                         $("#signedUp").css("display","flex")
                     }
                 } else {
-                    alert("Utilisateur non enregistré, demander la permission d'un administrateur.")
+                    docAdmin.get().then(function(doc){
+                        if(doc.exists){
+                            $("#checkMailBtn").css("display","none")
+                            $("#signedUp").css("display","flex")
+                        } else {
+                            alert("Utilisateur non enregistré, demander la permission d'un administrateur.")
+                        }
+                    })
                 }
             }).catch(function(error){
                 console.log(error)
@@ -137,6 +255,7 @@ function checkMail(event){
         console.log(error)
     })
 }
+
 
 
 // Fonction de création de compte
@@ -157,7 +276,7 @@ function newAccount(event){
                     if(doc.exists){
                         db.collection("élève").doc(mail).set({
                             firstCo: true
-                        }, { merge: true }).then(function(){ window.location.href = "index3.html" })
+                        }, { merge: true }).then(function(){ window.location.href = "index3.html", alert("Merci d'avoir créé votre compte, bienvenue !") })
                     } else {
                         db.collection("professeur").doc(mail).set({
                             firstCo: true
@@ -197,11 +316,12 @@ function signIn(event){
 
     const email = $('#Cemail').val();
     const password = $('#signedUpPass').val();
+    
 
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function(){
         console.log("signed in "+email)
-        window.location.href = "index3.html"
+        location.assign("index3.html")
     })
     .catch(function(error) {
         // Handle Errors here.
@@ -221,6 +341,7 @@ function signIn(event){
 }
 
 
+
 // Fonction de déconnexion
 
 function disconnect(event){
@@ -234,6 +355,7 @@ function disconnect(event){
         // An error happened.
     });
 }
+
 
 
 // addCourse
@@ -250,7 +372,7 @@ function addCourse(event){
     const fin = $("#endTime").val()
     const classe = $("#classe").val()
 
-    db.collection("Courses").doc().set({
+    db.collection("Cours").doc(matière).set({
         Matière: matière,
         Formateur: prof,
         Date: jour,
@@ -260,8 +382,10 @@ function addCourse(event){
     })
 }
 
-// display courses test
-db.collection("Courses").onSnapshot(function(querySnapshot){
+
+
+// display courses test ( à changer pour afficher dans EDT )
+db.collection("Cours").onSnapshot(function(querySnapshot){
     $(".courses").remove()
     querySnapshot.forEach(function(doc) {
         $("#displayTest").append(`
@@ -282,16 +406,31 @@ db.collection("Courses").onSnapshot(function(querySnapshot){
 
 
 
-/**
- * Fonctions Front-end
- */
+// Afficher élèves dans tableau
 
+function displayUsers(){
 
+    const selectClass = $("#selectClasses").val().toLowerCase()
 
-// Affichage champs de saisi d'ajout de cours
-
-function courseDisplay(){
-    $(".displayAddCourse").css("display","flex")
+    db.collection("élève").onSnapshot(function(querySnapshot){
+        $(".studentsRaw").remove()
+        let nbrStud = 0
+        querySnapshot.forEach(function(doc) {
+            if(doc.data().Classe == selectClass){
+                $("#Students").append(`
+                <tr class="studentsRaw">
+                    <td>${doc.data().Nom}</td>
+                    <td>${doc.data().Prénom}</td>
+                </tr>
+                `)
+                nbrStud++
+                $("#nbrStud").empty()
+                $("#nbrStud").append(`${nbrStud} étudiants`)
+                
+            }
+        })
+    })
+    
 }
 
 
@@ -304,6 +443,13 @@ firebase.auth().onAuthStateChanged(function(user) {
             ${user.email}
         `)
         console.log(user)
+        db.collection("administration").doc(user.email).get().then(function(doc){
+            if(doc.exists){
+                $(".adminDisplay").css("display","block")
+            } else {
+                $(".adminDisplay").css("display","none")
+            }
+        })
     } else {
       // No user is signed in.
       console.log("Aucun utilisateur connecté")

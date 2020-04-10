@@ -10,50 +10,58 @@
     <link rel="stylesheet" href="styles3.css">
 </head>
 <body>
+  
+  <!-- top section -->
 
-    <!-- navbar gauche  -->
-    <section class="left">
-        <div class="firstDiv">
-            <i class="fas fa-users fa-3x"></i>
-            <div id="profileName">
-              <p id="tagMail"></p>
-              <p id="tagGrade"></p>
+      <!-- navbar gauche  -->
+      <div class="fixed">
+        <section class="left">
+          <div class="firstDiv">
+              <i class="fas fa-users fa-3x"></i>
+              <div id="profileName">
+                <p id="tagMail"></p>
+              </div>
+          </div>
+          <div class="navTable">
+            <div class="navBtns" id="EDT">
+              <p>Emploi du temps</p>
             </div>
-        </div>
-        <div class="navTable">
-            <div class="navBtns">
-              <p>test</p>
-            </div>
-            <div class="navBtns">
-              <p>test</p>
-            </div>
-            <div class="navBtns" id="addCourseBtn">
-              <p>Ajouter un cours</p>
-            </div>
-            <div class="navBtns" id="addUser">
-              <p>Ajouter utilisateur</p>
-            </div>
-        </div>
-        <div class="bottomNav">
-          <div class="navBtns">test</div>
-          <div class="navBtns">test</div>
-            <button id="signOutBtn">Sign out</button>
-        </div>
-    </section>
+              <div class="navBtns" id="displayClasses">
+                <p>Classes</p>
+              </div>
+              <div class="navBtns adminDisplay" id="addCourseBtn">
+                <p>Ajouter un cours</p>
+              </div>
+              <div class="navBtns adminDisplay" id="addUser">
+                <p>Ajouter utilisateur</p>
+              </div>
+              <div class="navBtns" id="incrementTest">
+                <p>test</p>
+              </div>
+          </div>
+          <div class="bottomNav">
+            <button id="signOutBtn">Sign out</button> <!-- signed out ici -->
+          </div>
+      </section>
+      </div>
+
 
     <form action="" class="displayAddCourse">
+      <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <input type="text" id="subject" placeholder="Matière">
       <input type="text" id="teacher" placeholder="Professeur">
       <input type="date" id="day" placeholder="Date">
       <input type="time" id="startTime" placeholder="Heure de début">
       <input type="time" id="endTime" placeholder="Heure de fin">
       <input type="text" id="classe" placeholder="Classe">
-      <button type="submit">Ajouter</button>
+      <button id="addd" type="submit">Ajouter</button>
     </form>
 
 
-<!-- ----------------------------------------------------------- -->
-<!-- The tableau  -->
+  <!-- ----------------------------------------------------------- -->
+  <!-- The tableau  -->
 
     <section class="right">
         <div class="container scheduler">
@@ -404,6 +412,41 @@
     <!-- test display courses-->
     <div id="displayTest">
     </div>
+
+  
+
+
+  <!-- bottom section -->
+  <section class="botCtn">
+    <table id="newTable">
+      <thead>
+        <tr>
+          <th id="firstRow" colspan="2" >
+            <p id="nbrStud" style="color: white;"></p>
+            <select name="Classes" id="selectClasses" class="form-control">
+              <option value=""></option>
+            </select>
+            <div class="adminDisplay">
+              <button id="addClassBtn" class="btn btn-light">Ajout</button><button id="delClassBtn" class="btn btn-light">Suppr</button>
+              <div id="inputAddClass">
+                <input id="addInput" type="text" class="form-control"><button id="confirmAddClass" class="btn btn-light">Confirm</button>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="Students">
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  
+  
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
 
 
 <!-- font awesome -->

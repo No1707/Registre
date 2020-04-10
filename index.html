@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 </head>
 <body>
-<!-- <script>window.location.protocol !== 'http:' && document.write('<div class="alert alert-danger mb-0"><b>Attention ! Vous visitez cette page depuis l\'adresse « '+ window.document.URL +' »</b> !<br>Vous devriez utiliser un serveur web HTTP local (localhost) !<br>Pour lancer un serveur web local, ouvrez votre terminal et tapez la commande : <b>npm start</b></div>');</script> -->
-
 
 <main class="container mt-3">
    
@@ -32,16 +30,21 @@
                     <br>
                     <h4>Grade </h4>
                     <select class="form-control" id="etudes">
-                        <option>élève</option>
-                        <option>professeur</option>
+                        <option value="professeur">professeur</option>
+                        <option value="élève">élève</option>
                     </select>
+                    <div id="displayIf" style="display: none;">
+                        <br>
+                        <h4>Classe</h4>
+                        <input required type="text" class="form-control" id="classe" placeholder="Classe">
+                    </div>
                     <br>
-                    <button type="submit" class="btn btn-success">Valider l'inscription</button>
+                    <button type="submit" class="btn btn-success">Valider l'inscription</button><br><br>
+                    <button class="btn btn-success cancel">Retour</button>
                 </div>
             </form>
-        </div>
-    </div>
-</main>
+
+
 
 <!-- jQuery et Bootstrap-->
 <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
