@@ -2,12 +2,22 @@
 
 Le projet est lançable via un live-server. ( La page de départ est l'index 2 )
 
-Le projet est actuellement en total construction surtout niveau front-end.
+L'admin peut ajouter d'autres utilisateurs qui recevront un mail lors de l'ajout. 
 
-L'admin peut maintenant bien ajouter d'autres utilisateurs qui recevront un mail lors de l'ajout pour leur notifier l'ajout. 
+Lors de la saisie de leur adresse mail, il leur sera proposé de créer un compte directement si c'est leur première visite sur le site, ou de se connecter directement dans le cas contraire.
 
-Lors de la saisie de leur adresse mail, il leur sera proposé de créer un compte directement si c'est leur première visite sur le site, ou de se connecter dans le cas contraire.
+L'admin a maintenant des fonctionnalités uniques ( ajout/suppr classes , ajouts utilisateurs , ajouts cours.
 
-Casi toutes les fonctionnalités utilisateurs sont codés à part l'affichage de tels ou tels boutons en fonction du rôle de la personne connectée.
+Le tableau des classes est entièrement fonctionnel.
 
-Nous nous attaquerons ensuite au front-end, affichage des cours dans l'emploi du temps..
+Les prochaines fonctionnalités seront: 
+
+Affichage des cours dans l'emploi du temps,
+
+Absences et retards pour les élèves et professeurs.
+
+Compte admin: azer@azer.com mdp: admintest
+
+( pas encore de différence entre comptes élèves / professeurs )
+
+Compte élève: aze@aze.com mdp: azeaze
