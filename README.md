@@ -16,8 +16,3 @@ Affichage des cours dans l'emploi du temps,
 
 Absences et retards pour les élèves et professeurs.
 
-Compte admin: azer@azer.com mdp: admintest
-
-( pas encore de différence entre comptes élèves / professeurs )
-
-Compte élève: aze@aze.com mdp: azeaze
