@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control:focus{
+    border-color:#CCC;
+    outline:0;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+}
+
+/* All part */
+
+.form-group{
+    width: 300px;
+}
+
+.checkBtns{
+    width: 100%;
+}
+
+/* Top part */
+
+#checkMail{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+/* Bottom part */
+
+.botPart{
+    width: 100%;
+    height: 50%;
+    display: none;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+h2{
+    display: inline-block;
+}
