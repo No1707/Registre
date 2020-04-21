@@ -221,9 +221,11 @@ function checkMail(event){
     docEleve.get().then(function(doc){
         if(doc.exists){
             if(doc.data().firstCo == undefined){
+                $("#Cemail").attr("readonly", true)
                 $("#checkMailBtn").css("display","none")
                 $("#notSignedUp").css("display","flex")
             } else {
+                $("#Cemail").attr("readonly", true)
                 $("#checkMailBtn").css("display","none")
                 $("#signedUp").css("display","flex")
             }
@@ -231,15 +233,18 @@ function checkMail(event){
             docProf.get().then(function(doc){
                 if(doc.exists){
                     if(doc.data().firstCo == undefined){
+                        $("#Cemail").attr("readonly", true)
                         $("#checkMailBtn").css("display","none")
                         $("#notSignedUp").css("display","flex")
                     } else {
+                        $("#Cemail").attr("readonly", true)
                         $("#checkMailBtn").css("display","none")
                         $("#signedUp").css("display","flex")
                     }
                 } else {
                     docAdmin.get().then(function(doc){
                         if(doc.exists){
+                            $("#Cemail").attr("readonly", true)
                             $("#checkMailBtn").css("display","none")
                             $("#signedUp").css("display","flex")
                         } else {

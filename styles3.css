@@ -86,9 +86,9 @@ body{
 
 .right{
     position: relative;
-    height: 100vh;
-    width: auto;
-    right: 0;
+    height: 5%;
+    width: 75%;
+    right: -22%;
 }
 
 .scheduler{

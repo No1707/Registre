@@ -8,6 +8,12 @@
   <script src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles3.css">
+    
+    <!-- CSS DU CALENDRIER -->
+        <link rel="stylesheet" href="core/main.min.css">
+        <link rel="stylesheet" href="daygrid/main.min.css">
+        <link rel="stylesheet" href="timegrid/main.min.css">
+        <link rel="stylesheet" href="list/main.min.css">
 </head>
 <body>
   
@@ -64,7 +70,10 @@
   <!-- The tableau  -->
 
     <section class="right">
-        <div class="container scheduler">
+      <div id="calendrier">
+        
+      </div>
+        <!-- <div class="container scheduler">
             <div class="row">
                 <div class="col-sm cells">
                     1
@@ -406,8 +415,10 @@
                   </div>
             </div>
 
-        </div>
+        </div> -->
     </section>
+    <br>
+    
 
     <!-- test display courses-->
     <div id="displayTest">
@@ -445,10 +456,14 @@
   </section>
   
   
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  
     
-
-
+    <!-- JS DU CALENDRIER -->
+  <script src='core/main.min.js'></script>
+  <script src='daygrid/main.min.js'></script>
+  <script src='timegrid/main.min.js'></script>
+  <script src='list/main.min.js'></script>
+  <script src='calendrier.js'></script>
 <!-- font awesome -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 <!-- jQuery et Bootstrap-->
@@ -458,5 +473,6 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
 <script src="realtime-database.js" type="module"></script>
+
 </body>
 </html>
