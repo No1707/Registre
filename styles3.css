@@ -1,0 +1,319 @@
+body{
+    margin: 0;
+    padding: 0; 
+    background-image: url(../lib/geo.jpg);
+    color: gray;
+    
+}
+
+#calendrier {
+    /* background-image: url(../lib/geo.jpg); */
+    color: goldenrod;
+    
+    
+    
+}
+.topCtn{
+    width: 100vw;
+    display: flex;
+    margin-bottom: 200px;
+}
+
+/* Navbar gauche */
+
+.fixed{
+    position: fixed;
+    height: 100vh;
+    width: 20%;
+    z-index: 1;
+}
+
+.left{
+    position: relative;
+    background-image: url(../lib/geo.jpg);
+    height: 50%;
+    border-radius: 80px;
+    -webkit-box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.60);
+    -moz-box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.60);
+    box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.60);
+    font-size: 20px;
+}
+
+
+.firstDiv{
+    background:none;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 10%;
+}
+
+.navTable{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 70%;
+    padding-top: 50px;
+}
+
+.navBtns{
+    width: 90%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    transition: 0.2s;
+    border-radius: 10px;
+}
+
+.navBtns:hover{
+    cursor: pointer;
+    background-color: lightblue;
+}
+
+.bottomNav{
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#signOutBtn{
+    transition: 0.3s;
+    border: none;
+    background-color: beige;
+    height: 50px;
+    width: 60%;
+}
+
+#signOutBtn:hover{
+    border-radius: 10px;
+    background-color: red;
+    color: white
+}
+
+.form-group {
+    height: 1%;
+}
+
+/* Emploi du temps */
+
+.right{
+    position: relative;
+    height: 5%;
+    width: 75%;
+    right: -22%;
+}
+
+.scheduler{
+    position: relative;
+    border: 2px solid black;
+    margin: 0 50px 0 auto;
+    top: 70px;
+}
+
+.cells{
+    border: 1px solid grey;
+    height: 35px;
+}
+
+.cells:hover{
+    background-color: lightblue;
+}
+
+
+/* Ajouter cours */
+
+.displayAddCourse{
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 40%;
+    width: 40%;
+    top: 30%;
+    left: 35%;
+    background-color: beige;
+    z-index: 1;
+}
+.displayAddCourse input{
+    width: 50%;
+}
+
+#addd{
+    border: none;
+    background-color: beige;
+    height: 10%;
+    width: 30%;
+    border: 1px solid black;
+}
+
+.close{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+
+/* DISPLAY TEST */
+#displayTest{
+    position: absolute;
+    right: 50%;
+    bottom: 0;
+}
+
+
+/* Bottom Ctn */
+
+.botCtn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+/* Tableau Classes */
+
+
+#newTable{
+    margin-right: 50px;
+    width: 70%;
+    text-align: center;
+}
+#inputAddClass{
+    display: none;
+}
+#firstRow{
+    background-color: #6B77D8;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+#firstRow select{
+    width: 80px;
+    display: inline-block;
+}
+#firstRow button{
+    margin: 0 10px;
+}
+#firstRow input{
+    width: auto;
+    display: inline;
+}
+
+
+/* ANIMATION BACKGROUND */
+
+.animation_back{
+    position: relative;
+    background:transparent;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    /* linear-gradient(to left, #2F1847, #624763); */
+}
+
+.box-area{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border:none;
+}
+
+.box-area li{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 25px;
+    height: 25px;
+    background: rgba(255,255,255,0.2);
+    animation: animate 20s linear infinite;
+    border:  yellow solid 3px;
+    bottom: -150px;
+    
+}
+
+.box-area li:nth-child(1){
+    left: 86%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+    border:  orange solid 3px;
+    filter: blur(5px);
+}
+.box-area li:nth-child(2){
+    left: 12%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 1.5s;
+    animation-duration: 10s;
+    border:  purple solid 3px;
+    
+}
+.box-area li:nth-child(3){
+    left: 70%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 5.5s;
+    border: mediumslateblue solid 3px;
+
+
+}
+.box-area li:nth-child(4){
+    left: 70%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 15s;
+    border: tan solid 3px;
+
+}
+.box-area li:nth-child(5){
+    left: 65%;
+    width: 40px;
+    height: 40px;
+    animation-delay: 0s;
+    border:  palevioletred solid 3px;
+    
+
+}
+.box-area li:nth-child(6){
+    left: 25%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3.5s;
+    border: olive solid 3px;
+
+}
+.box-area li:nth-child(7){
+    left: 15%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 3.5s;
+    border: slategray solid 3px;
+
+}
+.box-area li:nth-child(8){
+    left: 10%;
+    width: 10px;
+    height: 10px;
+    animation-delay: 3.5s;
+    border: mediumseagreen solid 3px;
+    filter: blur(5px);
+
+}
+@keyframes animate{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100%{
+        transform:translateY(-800px) rotate(360deg);
+        opacity: 0;
+    }
+}
