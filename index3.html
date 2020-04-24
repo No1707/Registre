@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emploi du temps</title>
+    <!-- SMTP JS -->
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles3.css">
+    
+    <!-- CSS DU CALENDRIER -->
+        <link rel="stylesheet" href="/fullCalendar/core/main.css">
+        <link rel="stylesheet" href="/fullCalendar/daygrid/main.css">
+        <link rel="stylesheet" href="/fullCalendar/timegrid/main.css">
+        <link rel="stylesheet" href="/fullCalendar/list/main.css">
+</head>
+<body>
+  
+
+  <!-- top section -->
+
+      <!-- navbar gauche  -->
+      <div class="fixed">
+        <section class="left">
+          <div class="firstDiv">
+              <i class="fas fa-users fa-3x"></i>
+              <div id="profileName">
+                <p id="tagMail"></p>
+              </div>
+          </div>
+          <div class="navTable">
+            <div class="navBtns" id="EDT">
+              <p>Emploi du temps</p>
+            </div>
+              <div class="navBtns" id="displayClasses">
+                <p>Classes</p>
+              </div>
+              <div class="navBtns adminDisplay" id="addCourseBtn">
+                <p>Ajouter un cours</p>
+              </div>
+              <div class="navBtns adminDisplay" id="addUser">
+                <p>Ajouter utilisateur</p>
+              </div>
+              <div class="navBtns" id="incrementTest">
+                <p>test</p>
+              </div>
+          </div>
+          <div class="bottomNav">
+            <button id="signOutBtn">Sign out</button> <!-- signed out ici -->
+          </div>
+      </section>
+      
+      <!-- AJOUT DANS LE PLANNING -->
+      <form class="form form" id="addForm">
+        <div class="form-group">
+            <h5>Matière</h5>
+            <input required type="text" class="form-control" id="matiére" placeholder="matière">
+            <br>
+            <h5>Début</h5>
+            <input required type="text" class="form-control" id="start" placeholder="ex : 2020-04-21 11:30:00">
+            <br>
+            <h5>Fin</h5>
+            <input required type="text" class="form-control" id="end" placeholder="ex : 2020-04-21 12:30:00">
+                <br>
+             
+        </div>
+            
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button class="btn btn-primary cancel">Annuler</button>
+        </div>
+    </form>
+      </div>
+
+
+    <form action="" class="displayAddCourse">
+      <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <input type="text" id="subject" placeholder="Matière">
+      <input type="text" id="teacher" placeholder="Professeur">
+      <input type="date" id="day" placeholder="Date">
+      <input type="time" id="startTime" placeholder="Heure de début">
+      <input type="time" id="endTime" placeholder="Heure de fin">
+      <input type="text" id="classe" placeholder="Classe">
+      <button id="addd" type="submit">Ajouter</button>
+    </form>
+
+
+  <!-- ----------------------------------------------------------- -->
+  
+   
+
+  <div class="animation_back">
+    <ul class="box-area">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  
+<section class="right">
+
+
+       <!-- FORMULAIRE POUR REMPLIR LE CALENDRIER -->
+    
+     
+    <br>
+ 
+
+       <!-- CALENDRIER  -->
+      <div id="calendrier"></div>
+
+</section>
+
+    <br>
+    
+
+    <!-- test display courses-->
+    <div id="displayTest">
+    </div>
+
+  
+
+
+  <!-- bottom section -->
+  <section class="botCtn">
+    <table id="newTable">
+      <thead>
+        <tr>
+          <th id="firstRow" colspan="2" >
+            <p id="nbrStud" style="color: white;"></p>
+            <select name="Classes" id="selectClasses" class="form-control">
+              <option value=""></option>
+            </select>
+            <div class="adminDisplay">
+              <button id="addClassBtn" class="btn btn-light">Ajout</button><button id="delClassBtn" class="btn btn-light">Suppr</button>
+              <div id="inputAddClass">
+                <input id="addInput" type="text" class="form-control"><button id="confirmAddClass" class="btn btn-light">Confirm</button>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="Students">
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+        </tr>
+      </tbody>
+    </table>
+  
+  </section>
+</div>
+  
+  
+    
+    <!-- JS DU CALENDRIER -->
+  <script src='/fullCalendar/core/main.js'></script>
+  <script src='/fullCalendar/daygrid/main.js'></script>
+  <script src='/fullCalendar/timegrid/main.js'></script>
+  <script src='/fullCalendar/list/main.js'></script>
+  
+<!-- font awesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+<!-- jQuery et Bootstrap-->
+<script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- SDK Firebase -->
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+<script src="realtime-database.js" type="module"></script>
+
+</body>
+</html>
