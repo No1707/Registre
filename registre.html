@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="registre.css">
+    <!-- CSS DU CALENDRIER -->
+    <link rel="stylesheet" href="core/main.min.css">
+    <link rel="stylesheet" href="daygrid/main.min.css">
+    <link rel="stylesheet" href="timegrid/main.min.css">
+    <link rel="stylesheet" href="list/main.min.css">
+</head>
+<body>
+  
+    <!-- navbar -->
+    <div class="fixed">
+        <div class="profileContainer">
+            <div class="profilePic">
+                <i class="fas fa-users fa-5x"></i>
+            </div>
+            <div class="profileInfos">
+                <p id="tagMail"></p>
+            </div>
+        </div>
+        <div class="navbarL">
+            <div class="navBtns">
+                <button class="neumorph" id="EDT">Emploi du Temps</button>
+            </div>
+            <div class="navBtns">
+                <button class="neumorph" id="displayClasses">Classes</button>
+            </div>
+            <div class="navBtns">
+                <button class="neumorph adminDisplay" id="addUserBtn" data-toggle="collapse" data-target="#addUserDiv" aria-expanded="false" aria-controls="addUserDiv">Ajouter utilisateurs</button>
+            </div>
+            <div class="navBtns">
+                <button class="neumorph adminDisplay" type="button" id="addCourseBtn" data-toggle="collapse" data-target="#addCourseDiv" aria-expanded="false" aria-controls="addCourseDiv">Ajouter cours</button>
+            </div>
+        </div>
+        <div class="signOutcontainer navBtns">
+            <button class="neumorph" id="signOutBtn">Déconnection</button>
+        </div>
+    </div>
+
+    <!-- animation background -->
+    <div class="animation_back">
+      <ul class="box-area">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li> 
+        <li></li>
+      </ul>
+      
+
+    <!-- calendrier -->
+    <section class="main">
+      
+      <div id="calendrier"></div>
+
+    </section>
+    
+
+  <section class="mid">
+
+    <!-- Div form ajout cours -->
+    <div class="collapse" id="addCourseDiv">
+      <div class="card card-body">
+        <form class="form form" id="addCourseForm">
+          <div class="form-group">
+            <h5>Classe</h5>
+            <input type="text" required class="form-control" id="classCourse" placeholder="Classe" autocomplete="off"><br>
+            <h5>Matière</h5>
+            <input type="text" required class="form-control" id="matière" placeholder="Matière" autocomplete="off"><br>
+            <h5>Début</h5>
+            <input required type="text" class="form-control" id="start" placeholder="Ex : 2020-04-21 11:30:00" autocomplete="off"><br>
+            <h5>Fin</h5>
+            <input required type="text" class="form-control" id="end" placeholder="Ex : 2020-04-21 12:30:00" autocomplete="off">
+          </div>
+          <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Div form ajout utilisateur -->
+    <div class="collapse" id="addUserDiv">
+      <div class="card card-body">
+        <form class="form form" id="addUserForm">
+          <div class="form-group">
+            <h5>Nom</h5>
+            <input type="text" required class="form-control" id="nom" placeholder="Nom" autocomplete="off"><br>
+            <h5>Prénom</h5>
+            <input type="text" required class="form-control" id="prénom" placeholder="Prénom" autocomplete="off"><br>
+            <h5>Email</h5>
+            <input type="text" required class="form-control" id="email" placeholder="Mail" autocomplete="off"><br>
+            <h5>Rôle</h5>
+            <select class="form-control" id="etudes">
+              <option value="professeur">Professeur</option>
+              <option value="élève">Élève</option>
+            </select><br>
+            <div id="displayIf" style="display: none;">
+              <h5>Classe</h5>
+              <input type="text" required class="form-control" id="classe" placeholder="Classe" autocomplete="off"><br>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="bot">
+
+    <table id="newTable">
+      <thead>
+        <tr>
+          <th id="firstRow" colspan="2" >
+            <p id="nbrStud" style="color: white;"></p>
+            <select name="Classes" id="selectClasses" class="form-control">
+              <option value=""></option>
+            </select>
+            <div class="adminDisplay">
+              <button id="addClassBtn" class="btn btn-light">Ajouter classe</button><button id="delClassBtn" class="btn btn-light">Supprimer classe</button>
+              <div id="inputAddClass">
+                <input id="addInput" type="text" class="form-control"><button id="confirmAddClass" class="btn btn-light">Confirm</button>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="Students">
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+    
+  </div> 
+
+
+
+    <!-- jQuery -->
+    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- JS DU CALENDRIER -->
+    <script src='core/main.min.js'></script>
+    <script src='daygrid/main.min.js'></script>
+    <script src='timegrid/main.min.js'></script>
+    <script src='list/main.min.js'></script>
+    <!-- Font awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <!-- SDK Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+    <script src="realtime-database.js" type="module"></script>
+</body>
+</html>

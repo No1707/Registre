@@ -1,0 +1,292 @@
+/* Set ups */
+
+*{
+    font-family: 'Ubuntu', sans-serif;
+}
+body{
+    margin: 0;
+    padding: 0; 
+    background-color: #EFEEEE;
+}
+
+button:focus{
+    outline: none;
+}
+button:hover{
+    cursor: pointer;
+}
+.neumorph{
+    box-shadow: -6px -6px 26px 0 rgba(255, 255, 255, 0.83);
+    box-shadow: 6px 6px 16px 0 rgba(217, 210, 200, 0.51);
+    background-color: #EFEEEE;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 12px;
+}
+
+/* Navbar */
+
+.fixed{
+    position: fixed;
+    height: 100vh;
+    width: 20%;
+    z-index: 2;
+}
+
+/* Boutons */
+
+.profileContainer{
+    background-color: #3788d8;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profilePic{
+    width: 35%;
+    color: white;
+}
+.profileInfos{
+    width: 65%;
+}
+
+.navbarL{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 80%;
+}
+.navBtns{
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navBtns button{
+    height: 40%;
+    width: 70%;
+    font-size: 20px;
+    transition: 0.4s;
+}
+.navBtns button:hover{
+    opacity: 0.5;
+    color: rgb(87, 170, 87)
+}
+.navBtns button:active{
+    box-shadow: inset -6px -6px 26px 0 rgba(255, 255, 255, 0.83);
+    box-shadow: inset 6px 6px 16px 0 rgba(217, 210, 200, 0.51);
+    opacity: 1;
+}
+.signOutcontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+}
+.signOutcontainer button:hover{
+    background-color: #ce0f0f;
+    color: white;
+    opacity: 1;
+}
+
+
+
+/* Section 1 */
+
+.main{
+    /* background-color: #EFEEEE; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    left: 20%;
+    width: 80%;
+}
+
+#calendrier{
+    width: 90%;
+}
+
+
+
+/* Section 2 */
+
+.mid{
+    /* background-color: #EFEEEE; */
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    left: 20%;
+    width: 80%;
+}
+
+    /* Form ajout cours */
+
+#addCourseDiv{
+    width: 30%;
+}
+#addUserDiv{
+    width: 30%;
+}
+.card-body{
+    background: none;
+}
+
+/* Section 3 */
+
+.bot{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    left: 20%;
+    width: 80%;
+    height: 500px;
+}
+
+    /* Tableau élèves */
+
+#newTable{
+    width: 80%;
+    text-align: center;
+    margin-top: 100px;
+}
+#inputAddClass{
+    display: none;
+}
+#firstRow{
+    background-color: #3788d8;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+#firstRow select{
+    width: 80px;
+    display: inline-block;
+}
+#firstRow button{
+    margin: 0 10px;
+}
+#firstRow input{
+    width: auto;
+    display: inline;
+}
+#students{
+    min-height: 150px;
+}
+
+
+/* ANIMATION BACKGROUND */
+
+.animation_back{
+    position: relative;
+    /* background:transparent; */
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    /* linear-gradient(to left, #2F1847, #624763); */
+}
+
+.box-area{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border:none;
+}
+
+.box-area li{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 25px;
+    height: 25px;
+    background: rgba(255,255,255,0.2);
+    animation: animate 20s linear infinite;
+    border:  yellow solid 3px;
+    bottom: -150px;
+    
+}
+
+.box-area li:nth-child(1){
+    left: 86%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+    border:  orange solid 3px;
+    filter: blur(5px);
+}
+.box-area li:nth-child(2){
+    left: 12%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 1.5s;
+    animation-duration: 10s;
+    border:  purple solid 3px;
+    
+}
+.box-area li:nth-child(3){
+    left: 70%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 5.5s;
+    border: mediumslateblue solid 3px;
+
+
+}
+.box-area li:nth-child(4){
+    left: 70%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 15s;
+    border: tan solid 3px;
+
+}
+.box-area li:nth-child(5){
+    left: 65%;
+    width: 40px;
+    height: 40px;
+    animation-delay: 0s;
+    border:  palevioletred solid 3px;
+    
+
+}
+.box-area li:nth-child(6){
+    left: 25%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3.5s;
+    border: olive solid 3px;
+
+}
+.box-area li:nth-child(7){
+    left: 15%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 3.5s;
+    border: slategray solid 3px;
+
+}
+.box-area li:nth-child(8){
+    left: 10%;
+    width: 10px;
+    height: 10px;
+    animation-delay: 3.5s;
+    border: mediumseagreen solid 3px;
+    filter: blur(5px);
+
+}
+@keyframes animate{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100%{
+        transform:translateY(-1600px) rotate(360deg);
+        opacity: 0;
+    }
+}
