@@ -21,6 +21,16 @@ button:hover{
     background-color: #EFEEEE;
     border: 1px solid rgba(255, 255, 255, 0.20);
     border-radius: 12px;
+    transition: 0.4s;
+}
+.neumorph:hover{
+    opacity: 0.5;
+    color: rgb(87, 170, 87)
+}
+.neumorph:active{
+    box-shadow: inset -6px -6px 26px 0 rgba(255, 255, 255, 0.83);
+    box-shadow: inset 6px 6px 16px 0 rgba(217, 210, 200, 0.51);
+    opacity: 1;
 }
 
 /* Navbar */
@@ -40,14 +50,17 @@ button:hover{
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 .profilePic{
-    width: 35%;
+    width: 30%;
     color: white;
 }
 .profileInfos{
-    width: 65%;
+    width: 50%;
+}
+#tagMail{
+    font-size: 15px;
 }
 
 .navbarL{
@@ -66,16 +79,6 @@ button:hover{
     height: 40%;
     width: 70%;
     font-size: 20px;
-    transition: 0.4s;
-}
-.navBtns button:hover{
-    opacity: 0.5;
-    color: rgb(87, 170, 87)
-}
-.navBtns button:active{
-    box-shadow: inset -6px -6px 26px 0 rgba(255, 255, 255, 0.83);
-    box-shadow: inset 6px 6px 16px 0 rgba(217, 210, 200, 0.51);
-    opacity: 1;
 }
 .signOutcontainer{
     display: flex;
@@ -103,7 +106,10 @@ button:hover{
     left: 20%;
     width: 80%;
 }
-
+#selectClassesCalendar{
+    width: 70%;
+    height: 40%;
+}
 #calendrier{
     width: 90%;
 }
@@ -162,7 +168,7 @@ button:hover{
     border-top-right-radius: 20px;
 }
 #firstRow select{
-    width: 80px;
+    width: 150px;
     display: inline-block;
 }
 #firstRow button{
@@ -172,8 +178,32 @@ button:hover{
     width: auto;
     display: inline;
 }
-#students{
-    min-height: 150px;
+#Students{
+    height: 300px;
+}
+#editUsersBtn{
+    position: absolute; 
+    right: 10%;
+}
+.studentsRow{
+    height: 50px;
+    z-index: 1;
+}
+.editBtns{
+    display: none;
+    width: 30%;
+}
+.editBtns button{
+    margin: 0 10px;
+    height: 80%;
+}
+
+    /* Div modif user */
+
+#modifUserDiv{
+    width: 40%;
+    position: relative;
+    left: 40%;
 }
 
 

@@ -16,25 +16,33 @@ var db = firebase.firestore();
 
 // Display les cours dans le calendrier 
 
+function calChange(){
+    db.collection("Cours").onSnapshot(function(querySnapshot){
+        evenements = []
+        querySnapshot.forEach(function(doc) {
+            
+            const classe = doc.data().Classe
+            const matière = doc.data().Matière
+            const start = doc.data().Début
+            const end = doc.data().Fin
 
-db.collection("Cours").onSnapshot(function(querySnapshot){
-    evenements = []
-    querySnapshot.forEach(function(doc) {
+            if( $("#selectClassesCalendar").val() == classe){
+            
+                let cours = {
+                    "title": matière,
+                    "start": start,
+                    "end": end
+                }
 
-        const matière = doc.data().Matière
-        const start = doc.data().Début
-        const end = doc.data().Fin
-        let cours = {
-            "title": matière,
-            "start": start,
-            "end": end
-        }
-        
-
-        evenements.push(cours)
-        rerender()
+                evenements.push(cours)
+                rerender()
+            }
+        });
     });
-});
+}
+
+
+// fonction de rendering du calendrier
 
 function rerender(){
     $("#calendrier").html("")
@@ -55,7 +63,9 @@ function rerender(){
             week:"Semaine",
             list:"liste",
         },
-        events: evenements
+        events: evenements,
+        nowIndicator: true,
+        eventClick: function(){ alert("yo")}
     })
     calendrier.render()
 }
@@ -84,7 +94,8 @@ let calendrier = new FullCalendar.Calendar(elementCalendrier, {
         week:"Semaine",
         list:"liste",
     },
-    events: evenements
+    events: evenements,
+    nowIndicator: true
 })
 calendrier.render()
 
@@ -96,19 +107,27 @@ calendrier.render()
 $("#delClassBtn").on("click", delClass)
 $("#confirmAddClass").on("click", confirmAddClass)
 $('#addUserForm').on('submit', onAddUser);
-
-
-$("#signOutBtn").click(disconnect);
+$("#signOutBtn").on("click", disconnect);
 $("#addCourseForm").on('submit', addCourse)
+$("#modifUserForm").on("submit", confirmModif)
+function rerunBtns(){
+    $(".supprBtn").on("click", supprUser )
+    $(".modifBtn").on("click", modifUser ) 
+}
 
 //Front-end
 $("#addClassBtn").on("click", () => $("#inputAddClass").css("display","block"))
 $("#selectClasses").change(displayUsers)
+$("#selectClassesCalendar").change(calChange)
 $("#addUserBtn").on("click", () => $("html, body").animate({scrollTop: $(".mid").offset().top - 200}))
 $("#addCourseBtn").on("click", () => $("html, body").animate({scrollTop: $(".mid").offset().top - 200}))
 $("#displayClasses").on("click", () => $("html, body").animate({scrollTop: $("#newTable").offset().top}, 600))
 $("#EDT").on("click", () => $("html, body").animate({scrollTop: $(".main").offset().top}, 600))
 $("#etudes").change( () => {if( $("#etudes").val() == "élève"){$("#displayIf").css("display","block")} else { $("#displayIf").css("display","none")}})
+$("#editUsersBtn").on("click", () => {
+    $(".editBtns").css("display","table-cell")
+    rerunBtns()
+})
 
 
 
@@ -150,7 +169,19 @@ function delClass(){
     }
 }
 
-// Affichage des classes créés dans le menu select du tableau
+// Affichage des classes créés dans le select du calendrier 
+
+db.collection("Classes").onSnapshot(function(querySnapshot){
+    $(".studentClassCalendar").remove()
+    querySnapshot.forEach(function(doc) {
+        $("#selectClassesCalendar").append(`
+            <option class="studentClassCalendar" value="${doc.id}">${doc.id}</option>
+        `)
+    });
+});
+
+
+// Affichage des classes créés dans le menu select du tableau ( Tableau de display des élèves / profs )
 
 
 db.collection("Classes").onSnapshot(function(querySnapshot){
@@ -162,6 +193,85 @@ db.collection("Classes").onSnapshot(function(querySnapshot){
     });
 });
 
+
+// Supprimer informations de l'utilisateur
+
+function supprUser(){
+    const td = $(this).attr("class").split(" ")[0]
+
+    if( $("#selectClasses").val() == "professeurs"){
+        db.collection("professeur").doc(td).delete().then(function() {
+            console.log("Document successfully deleted!");
+            alert("Utilisateur supprimé avec succés")
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+    } else {
+        db.collection("élève").doc(td).delete().then(function() {
+            console.log("Document successfully deleted!");
+            alert("Utilisateur supprimé avec succés")
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+    }
+}
+
+
+// Modifier information de l'utilisateur
+
+function modifUser(){
+    const td = $(this).attr("class").split(" ")[0]
+    $("html, body").animate({scrollTop: $("html").height()})
+    
+    if( $("#selectClasses").val() == "professeurs"){
+        db.collection("professeur").doc(td).get().then(function(doc){
+            if(doc.exists){
+                $("#Mclasse").prop("required",false)
+                $("#displayM").css("display","none")
+                $("#Mnom").val(doc.data().Nom)
+                $("#Mprénom").val(doc.data().Prénom)
+                $("#Memail").val(doc.data().Mail)
+
+            }
+        })
+    } else {
+        db.collection("élève").doc(td).get().then(function(doc){
+            if(doc.exists){
+                $("#Mclasse").prop("required",true)
+                $("#displayM").css("display","block")
+                $("#Mnom").val(doc.data().Nom)
+                $("#Mprénom").val(doc.data().Prénom)
+                $("#Memail").val(doc.data().Mail)
+                $("#Mclasse").val(doc.data().Classe)
+            }
+        })
+    }
+}
+
+// Confirmation des modifications de l'utilisateur
+
+function confirmModif(event){
+    event.preventDefault()
+
+    if( $("#selectClasses").val() == "professeurs"){
+        db.collection("professeur").doc(td).get().then(function(doc){
+            if(doc.exists){
+                $("#Mnom").val(doc.data().Nom)
+                $("#Mprénom").val(doc.data().Prénom)
+                $("#Memail").val(doc.data().Mail)
+            }
+        })
+    } else {
+        db.collection("élève").doc(td).get().then(function(doc){
+            if(doc.exists){
+                $("#Mnom").val(doc.data().Nom)
+                $("#Mprénom").val(doc.data().Prénom)
+                $("#Memail").val(doc.data().Mail)
+                $("#Mclasse").val(doc.data().Classe)
+            }
+        })
+    }
+}
 
 // Ajouter utilisateurs à la database
 
@@ -180,7 +290,7 @@ function onAddUser (event) {
                 $('#email').css("border","2px red solid")
                 alert("Ce mail a déjà été enregistré, l'utilisateur a dû recevoir un mail l'invitant à s'inscrire.") // Coder possibilité de renvoyer un mail ici
             } else {
-                if( classe.length >= 3){
+                if( $("#displayIf").css("display") == "block" ){
                     db.collection(grade).doc(email).set({
                         Nom: nom,
                         Prénom: prénom,
@@ -275,7 +385,8 @@ function addCourse(event){
     const start = $("#start").val()
     const end = $("#end").val()
 
-    db.collection("Cours").doc(classe).set({
+    db.collection("Cours").doc().set({
+        Classe: classe,
         Matière: matière,
         Début: start,
         Fin: end
@@ -296,29 +407,45 @@ function displayUsers(){
 
     const selectClass = $("#selectClasses").val().toLowerCase()
 
-    db.collection("élève").onSnapshot(function(querySnapshot){
-        $(".studentsRaw").remove()
-        let nbrStud = 0
-        querySnapshot.forEach(function(doc) {
-            if(doc.data().Classe == selectClass){
-                $("#Students").append(`
-                <tr class="studentsRaw">
-                    <td>${doc.data().Nom}</td>
-                    <td>${doc.data().Prénom}</td>
-                </tr>
-                `)
-                nbrStud++
-                $("#nbrStud").empty()
-                $("#nbrStud").append(`${nbrStud} étudiants`)
-            }
+    if( $("#selectClasses").val() == "professeurs"){
+        db.collection("professeur").onSnapshot(function(querySnapshot){
+            $(".studentsRow").remove()
+            querySnapshot.forEach(function(doc) {
+                    $("#Students").append(`
+                    <tr class="studentsRow">
+                        <td>${doc.data().Nom}</td>
+                        <td>${doc.data().Prénom}</td>
+                        <td class="editBtns"><button class="${doc.data().Mail} neumorph modifBtn" data-toggle="collapse" data-target="#modifUserDiv">Modifier</button><button class="${doc.data().Mail} neumorph supprBtn">Supprimer</button></td>
+                    </tr>
+                    `)
+                    $("#nbrStud").empty()
+            })
         })
-    })
-    
+    } else {
+        db.collection("élève").onSnapshot(function(querySnapshot){
+            $(".studentsRow").remove()
+            let nbrStud = 0
+            querySnapshot.forEach(function(doc) {
+                if(doc.data().Classe == selectClass){
+                    $("#Students").append(`
+                    <tr class="studentsRow">
+                        <td>${doc.data().Nom}</td>
+                        <td>${doc.data().Prénom}</td>
+                        <td class="editBtns"><button class="${doc.data().Mail} neumorph modifBtn" data-toggle="collapse" data-target="#modifUserDiv">Modifier</button><button class="${doc.data().Mail} neumorph supprBtn">Supprimer</button></td>
+                    </tr>
+                    `)
+                    nbrStud++
+                    $("#nbrStud").empty()
+                    $("#nbrStud").append(`${nbrStud} étudiants`)
+                }
+            })
+        })
+    }
 }
 
 
 
-// Affichage de l'adresse de l'utilisateur connecté
+// Affichage de l'adresse mail de l'utilisateur connecté
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {

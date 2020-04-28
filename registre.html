@@ -28,6 +28,11 @@
         </div>
         <div class="navbarL">
             <div class="navBtns">
+              <select name="" id="selectClassesCalendar" class="form-control neumorph">
+                <option value=""></option>
+              </select>
+            </div>
+            <div class="navBtns">
                 <button class="neumorph" id="EDT">Emploi du Temps</button>
             </div>
             <div class="navBtns">
@@ -75,6 +80,7 @@
       <div class="card card-body">
         <form class="form form" id="addCourseForm">
           <div class="form-group">
+            <h2>Ajout de cours</h2><br>
             <h5>Classe</h5>
             <input type="text" required class="form-control" id="classCourse" placeholder="Classe" autocomplete="off"><br>
             <h5>Matière</h5>
@@ -94,6 +100,7 @@
       <div class="card card-body">
         <form class="form form" id="addUserForm">
           <div class="form-group">
+            <h2>Ajout d'utilisateur</h2><br>
             <h5>Nom</h5>
             <input type="text" required class="form-control" id="nom" placeholder="Nom" autocomplete="off"><br>
             <h5>Prénom</h5>
@@ -122,10 +129,12 @@
     <table id="newTable">
       <thead>
         <tr>
-          <th id="firstRow" colspan="2" >
+          <th id="firstRow" colspan="3" >
             <p id="nbrStud" style="color: white;"></p>
+            <button class="btn btn-light adminDisplay" id="editUsersBtn">Modifier utilisateurs</button>
             <select name="Classes" id="selectClasses" class="form-control">
               <option value=""></option>
+              <option value="professeurs">professeurs</option>
             </select>
             <div class="adminDisplay">
               <button id="addClassBtn" class="btn btn-light">Ajouter classe</button><button id="delClassBtn" class="btn btn-light">Supprimer classe</button>
@@ -145,6 +154,27 @@
     </table>
 
   </section>
+
+  <div class="collapse" id="modifUserDiv">
+    <div class="card card-body">
+      <form class="form form" id="modifUserForm">
+        <div class="form-group">
+          <h2>Modifier utilisateur</h2><br>
+          <h5>Nom</h5>
+          <input type="text" required class="form-control" id="Mnom" placeholder="Nom" autocomplete="off"><br>
+          <h5>Prénom</h5>
+          <input type="text" required class="form-control" id="Mprénom" placeholder="Prénom" autocomplete="off"><br>
+          <h5>Email</h5>
+          <input type="text" required class="form-control" id="Memail" placeholder="Mail" autocomplete="off"><br>
+          <div id="displayM">
+            <h5>Classe</h5>
+            <input type="text" required class="form-control" id="Mclasse" placeholder="Classe" autocomplete="off"><br>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Confirmer modifications</button>
+      </form>
+    </div>
+  </div>
     
   </div> 
 
