@@ -19,24 +19,25 @@
     <!-- navbar -->
     <div class="fixed">
         <div class="profileContainer">
-            <div class="profilePic">
+          <p id="tagMail"></p>
+            <!-- <div class="profilePic">
                 <i class="fas fa-users fa-5x"></i>
             </div>
             <div class="profileInfos">
                 <p id="tagMail"></p>
-            </div>
+            </div> -->
         </div>
         <div class="navbarL">
             <div class="navBtns">
               <select name="" id="selectClassesCalendar" class="form-control neumorph">
-                <option value=""></option>
+                <option value="ClassSelect">Sélect. Classe</option>
               </select>
             </div>
             <div class="navBtns">
                 <button class="neumorph" id="EDT">Emploi du Temps</button>
             </div>
             <div class="navBtns">
-                <button class="neumorph" id="displayClasses">Classes</button>
+                <button class="neumorph" id="displayClasses">Utilisateurs</button>
             </div>
             <div class="navBtns">
                 <button class="neumorph adminDisplay" id="addUserBtn" data-toggle="collapse" data-target="#addUserDiv" aria-expanded="false" aria-controls="addUserDiv">Ajouter utilisateurs</button>
@@ -67,6 +68,30 @@
 
     <!-- calendrier -->
     <section class="main">
+      <div class="courseInfos">
+        <div class="courseHead">
+          <div id="displayMat"></div>
+          <div id="displayEns"></div>
+          <div id="displayDat"></div>
+          <div id="displayHeu"></div>
+        </div>
+        <div class="courseBody">
+          <table id="studInfos">
+            <thead>
+              <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody class="courseStudents"></tbody>
+          </table>
+        </div>
+        <div class="courseFoot">
+          <button class="btn btn-primary adminDisplay" id="courseInfosConf">Confirmer</button>
+          <button class="btn btn-primary" id="closeW">Fermer</button>
+        </div>
+      </div>
       
       <div id="calendrier"></div>
 
@@ -82,13 +107,17 @@
           <div class="form-group">
             <h2>Ajout de cours</h2><br>
             <h5>Classe</h5>
-            <input type="text" required class="form-control" id="classCourse" placeholder="Classe" autocomplete="off"><br>
+            <input type="text" required class="form-control" id="classCourse" placeholder="Dèv 2" autocomplete="off"><br>
             <h5>Matière</h5>
-            <input type="text" required class="form-control" id="matière" placeholder="Matière" autocomplete="off"><br>
-            <h5>Début</h5>
-            <input required type="text" class="form-control" id="start" placeholder="Ex : 2020-04-21 11:30:00" autocomplete="off"><br>
-            <h5>Fin</h5>
-            <input required type="text" class="form-control" id="end" placeholder="Ex : 2020-04-21 12:30:00" autocomplete="off">
+            <input type="text" required class="form-control" id="matière" placeholder="Javascript" autocomplete="off"><br>
+            <h5>Enseignant</h5>
+            <input type="text" required class="form-control" id="enseignant" placeholder="Mr Meliot" autocomplete="off"><br>
+            <h5>Date</h5>
+            <input required type="text" class="form-control" id="date" placeholder="25/04/2020" autocomplete="off"><br>
+            <h5>Horaires de début</h5>
+            <input required type="text" class="form-control" id="start" placeholder="11:30:00" autocomplete="off"><br>
+            <h5>Horaires de fin</h5>
+            <input required type="text" class="form-control" id="end" placeholder="12:30:00" autocomplete="off">
           </div>
           <button type="submit" class="btn btn-primary">Ajouter</button>
         </form>
@@ -175,6 +204,8 @@
       </form>
     </div>
   </div>
+
+  
     
   </div> 
 
@@ -185,6 +216,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <!-- JS DU CALENDRIER -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src='core/main.min.js'></script>
     <script src='daygrid/main.min.js'></script>
     <script src='timegrid/main.min.js'></script>
@@ -195,6 +227,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
-    <script src="realtime-database.js"></script>
+    <script src="realtime-database.js" type="module"></script>
 </body>
 </html>

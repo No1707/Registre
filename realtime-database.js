@@ -14,69 +14,12 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
 
-// Display les cours dans le calendrier 
-
-function calChange(){
-    db.collection("Cours").onSnapshot(function(querySnapshot){
-        evenements = []
-        querySnapshot.forEach(function(doc) {
-            
-            const classe = doc.data().Classe
-            const matière = doc.data().Matière
-            const start = doc.data().Début
-            const end = doc.data().Fin
-
-            if( $("#selectClassesCalendar").val() == classe){
-            
-                let cours = {
-                    "title": matière,
-                    "start": start,
-                    "end": end
-                }
-
-                evenements.push(cours)
-                rerender()
-            }
-        });
-    });
-}
-
-
-// fonction de rendering du calendrier
-
-function rerender(){
-    $("#calendrier").html("")
-    calendrier = new FullCalendar.Calendar(elementCalendrier, {
-        //appelle les elements
-        plugins: ['dayGrid','timeGrid','list'],
-        contentHeight: 700,
-        defaultView: 'timeGridWeek',
-        locale : 'fr' ,//langue
-        header: {
-            left:'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,list'
-        },
-        buttonText: {
-            today:"Aujourd'hui",
-            month:"Mois",
-            week:"Semaine",
-            list:"liste",
-        },
-        events: evenements,
-        nowIndicator: true,
-        eventClick: function(){ alert("yo")}
-    })
-    calendrier.render()
-}
-
-
 let evenements = []
 
 
 let elementCalendrier = document.getElementById("calendrier")
 
-//on instancie le calendrier
+// création du calendrier
 let calendrier = new FullCalendar.Calendar(elementCalendrier, {
     //appelle les elements
     plugins: ['dayGrid','timeGrid','list'],
@@ -100,6 +43,60 @@ let calendrier = new FullCalendar.Calendar(elementCalendrier, {
 calendrier.render()
 
 
+// fonction de re-rendering du calendrier
+
+function rerender(){
+    $("#calendrier").html("")
+    calendrier = new FullCalendar.Calendar(elementCalendrier, {
+        //appelle les elements
+        plugins: ['dayGrid','timeGrid','list'],
+        contentHeight: 700,
+        defaultView: 'timeGridWeek',
+        locale : 'fr' ,//langue
+        header: {
+            left:'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,list'
+        },
+        buttonText: {
+            today:"Aujourd'hui",
+            month:"Mois",
+            week:"Semaine",
+            list:"liste",
+        },
+        events: evenements,
+        nowIndicator: true,
+        eventClick: function(info){
+            displayRegister(info.event)
+        }
+    })
+    calendrier.render()
+}
+
+
+// Display les cours dans le calendrier 
+
+function calChange(){
+    const value = $("#selectClassesCalendar").val()
+
+    db.collection("Cours").doc(value).collection("All").onSnapshot(function(querySnapshot){
+        evenements = []
+        querySnapshot.forEach(function(doc){
+            const oldDate = doc.id
+            let newDate = oldDate.split(" ")
+
+            let cours = {
+                "title": doc.data().Matière,
+                "start": doc.id,
+                "end": newDate[0]+" "+doc.data().Fin
+            }
+            evenements.push(cours)
+            rerender()
+        })
+        
+    })
+}
+
 
 // Initialisation des gestionnaires d'événement
 
@@ -110,12 +107,14 @@ $('#addUserForm').on('submit', onAddUser);
 $("#signOutBtn").on("click", disconnect);
 $("#addCourseForm").on('submit', addCourse)
 $("#modifUserForm").on("submit", confirmModif)
+$("#courseInfosConf").on("click", studInfos)
 function rerunBtns(){
     $(".supprBtn").on("click", supprUser )
     $(".modifBtn").on("click", modifUser ) 
 }
 
 //Front-end
+$("#closeW").on("click", () => $(".courseInfos").css("display","none"))
 $("#addClassBtn").on("click", () => $("#inputAddClass").css("display","block"))
 $("#selectClasses").change(displayUsers)
 $("#selectClassesCalendar").change(calChange)
@@ -129,13 +128,193 @@ $("#editUsersBtn").on("click", () => {
     rerunBtns()
 })
 
+// Afficher menu absences / retards du cours
 
+function displayRegister(e){
+    $(".courseInfos").css("display","flex")
+    $(".courseStudents").html("")
+    const classe = $("#selectClassesCalendar").val()
+
+    window.date = moment(e.start).format('YYYY-MM-DD hh:mm:ss');
+
+    
+    db.collection("Cours").doc(classe).collection("All").doc(date).get().then(function(doc){
+        if(doc.exists){
+            if(doc.data().firstList == "true"){
+                $("#courseInfosConf").css("dispay","none")
+                $("#closeW").css("dispay","block")
+                db.collection("Cours").doc(classe).collection("All").doc(date).collection("élèves").onSnapshot(function(querySnapshot){
+                    $(".courseStudents").html("")
+                    querySnapshot.forEach(function(doc){
+                        $(".courseStudents").append(`
+                        <tr>
+                            <td>${doc.data().Prénom}</td>
+                            <td>${doc.data().Nom}</td>
+                            <td>${doc.data().Status}</td>
+                        </tr>
+                        `)
+                    })
+                })
+            } else {
+                $("#courseInfosConf").css("dispay","block")
+                db.collection("élève").where("Classe", "==", classe).onSnapshot(function(querySnapshot){
+                    $(".courseStudents").html("")
+                    querySnapshot.forEach(function(doc){
+                        $(".courseStudents").append(`
+                            <tr class="studentStatus">
+                                <td>${doc.data().Nom}</td>
+                                <td>${doc.data().Prénom}</td>
+                                <td><select name="status" class="${doc.data().Mail}">
+                                    <option value="define">à définir</option>
+                                    <option value="présent">présent(e)</option>
+                                    <option value="retard">retard</option>
+                                    <option value="absent">absent(e)</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        `)
+                    })
+                })
+            }
+            $("#displayMat").html("")
+            $("#displayEns").html("")
+            $("#displayDat").html("")
+            $("#displayHeu").html("")
+
+            $("#displayMat").append(`${doc.data().Matière}`)
+            $("#displayEns").append(`${doc.data().Enseignant}`)
+            $("#displayDat").append(`${doc.data().Date}`)
+            $("#displayHeu").append(`${doc.data().Début}&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;${doc.data().Fin}`)
+        } else {
+            const val = date.slice(11, 13)
+            switch(val){
+                case "01": let val0 = date.split("")
+                val0.splice(11, 2, "1", "3")
+                window.newDate = val0.join("")
+                break;
+                case "02": let val1 = date.split("")
+                val1.splice(11, 2, "1", "4")
+                window.newDate = val1.join("")
+                break;
+                case "03": let val2 = date.split("")
+                val2.splice(11, 2, "1", "5")
+                window.newDate = val2.join("")
+                break;
+                case "04": let val3 = date.split("")
+                val3.splice(11, 2, "1", "6")
+                window.newDate = val3.join("")
+                break;
+                case "05": let val4 = date.split("")
+                val4.splice(11, 2, "1", "7")
+                window.newDate = val4.join("")
+                break;
+                case "06": let val5 = date.split("")
+                val5.splice(11, 2, "1", "8")
+                window.newDate = val5.join("")
+                break;
+                case "07": let val6 = date.split("")
+                val6.splice(11, 2, "1", "9")
+                window.newDate = val6.join("")
+                break;
+                case "08": let val7 = date.split("")
+                val7.splice(11, 2, "2", "0")
+                window.newDate = val7.join("")
+                break;
+                case "09": let val8 = date.split("")
+                val8.splice(11, 2, "2", "1")
+                window.newDate = val8.join("")
+                break;
+                case "10": let val9 = date.split("")
+                val9.splice(11, 2, "2", "2")
+                window.newDate = val9.join("")
+                break;
+                case "11": let val10 = date.split("")
+                val10.splice(11, 2, "2", "3")
+                window.newDate = val10.join("")
+                break;
+            }
+            date = newDate
+            db.collection("Cours").doc(classe).collection("All").doc(date).get().then(function(doc){
+                $("#displayMat").html("")
+                $("#displayEns").html("")
+                $("#displayDat").html("")
+                $("#displayHeu").html("")
+
+                $("#displayMat").append(`${doc.data().Matière}`)
+                $("#displayEns").append(`${doc.data().Enseignant}`)
+                $("#displayDat").append(`${doc.data().Date}`)
+                $("#displayHeu").append(`${doc.data().Début}&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;${doc.data().Fin}`)
+
+                if(doc.data().firstList == "true"){
+                    db.collection("Cours").doc(classe).collection("All").doc(date).collection("élèves").onSnapshot(function(querySnapshot){
+                        $(".courseStudents").html("")
+                        querySnapshot.forEach(function(doc){
+                            $(".courseStudents").append(`
+                            <tr>
+                                <th>${doc.data().Prénom}</th>
+                                <th>${doc.data().Nom}</th>
+                                <th>${doc.data().Status}</th>
+                            </tr>
+                            `)
+                        })
+                    })
+                } else {
+                    db.collection("élève").where("Classe", "==", classe).onSnapshot(function(querySnapshot){
+                        $(".courseStudents").html("")
+                        querySnapshot.forEach(function(doc){
+                            $(".courseStudents").append(`
+                                <tr class="studentStatus">
+                                    <td>${doc.data().Nom}</td>
+                                    <td>${doc.data().Prénom}</td>
+                                    <td><select name="status" class="${doc.data().Mail}">
+                                        <option value="define">à définir</option>
+                                        <option value="présent">présent(e)</option>
+                                        <option value="retard">retard</option>
+                                        <option value="absent">absent(e)</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            `)
+                        })
+                    })
+                }
+            })
+        }
+    })
+}
+
+
+// Confirmation des infos d'absences / retard envoyés à la database
+
+function studInfos(){
+    const classe = $("#selectClassesCalendar").val()
+    const ref = db.collection("Cours").doc(classe).collection("All").doc(date)
+
+    $(".courseInfos").css("display","none")
+
+    
+            $(".studentStatus").each(function(){
+                const prénom = $(this).children("td").eq(0).text()
+                const nom = $(this).children("td").eq(1).text()
+                const status = $(this).children("td").eq(2).children().val()
+        
+                ref.collection("élèves").doc().set({
+                    Nom: nom,
+                    Prénom: prénom,
+                    Status: status
+                },{merge: true})
+            })
+            ref.set({
+                firstList: "true"
+            },{merge: true})
+            alert("Liste enregistré !")
+}
 
 // Ajout classe database
 
 function confirmAddClass(){
 
-    const newClass = $("#addInput").val()
+    const newClass = $("#addInput").val().toLowerCase()
 
     db.collection("Classes").doc(newClass).get().then(function(doc){
         if(doc.exists){
@@ -169,26 +348,19 @@ function delClass(){
     }
 }
 
-// Affichage des classes créés dans le select du calendrier 
 
-db.collection("Classes").onSnapshot(function(querySnapshot){
-    $(".studentClassCalendar").remove()
-    querySnapshot.forEach(function(doc) {
-        $("#selectClassesCalendar").append(`
-            <option class="studentClassCalendar" value="${doc.id}">${doc.id}</option>
-        `)
-    });
-});
-
-
-// Affichage des classes créés dans le menu select du tableau ( Tableau de display des élèves / profs )
+// Affichage des classes dans le menu select du tableau et de la navbar
 
 
 db.collection("Classes").onSnapshot(function(querySnapshot){
     $(".studentClass").remove()
+    $(".studentClassCalendar").remove()
     querySnapshot.forEach(function(doc) {
         $("#selectClasses").append(`
             <option class="studentClass" value="${doc.id}">${doc.id}</option>
+        `)
+        $("#selectClassesCalendar").append(`
+            <option class="studentClassCalendar" value="${doc.id}">${doc.id}</option>
         `)
     });
 });
@@ -231,7 +403,6 @@ function modifUser(){
                 $("#Mnom").val(doc.data().Nom)
                 $("#Mprénom").val(doc.data().Prénom)
                 $("#Memail").val(doc.data().Mail)
-
             }
         })
     } else {
@@ -253,22 +424,23 @@ function modifUser(){
 function confirmModif(event){
     event.preventDefault()
 
+    const nom = $("#Mnom").val()
+    const prénom = $("#Mprénom").val()
+    const mail = $("#Memail").val()
+
     if( $("#selectClasses").val() == "professeurs"){
-        db.collection("professeur").doc(td).get().then(function(doc){
-            if(doc.exists){
-                $("#Mnom").val(doc.data().Nom)
-                $("#Mprénom").val(doc.data().Prénom)
-                $("#Memail").val(doc.data().Mail)
-            }
+        db.collection("professeur").doc(mail).set({
+            Nom: nom,
+            Prénom: prénom,
+            Mail: mail
         })
     } else {
-        db.collection("élève").doc(td).get().then(function(doc){
-            if(doc.exists){
-                $("#Mnom").val(doc.data().Nom)
-                $("#Mprénom").val(doc.data().Prénom)
-                $("#Memail").val(doc.data().Mail)
-                $("#Mclasse").val(doc.data().Classe)
-            }
+        const classe = $("#Mclasse").val()
+        db.collection("élève").doc(mail).set({
+            Nom: nom,
+            Prénom: prénom,
+            Mail: mail,
+            Classe: classe
         })
     }
 }
@@ -288,7 +460,7 @@ function onAddUser (event) {
         db.collection(grade).doc(email).get().then(function(doc){
             if(doc.exists){
                 $('#email').css("border","2px red solid")
-                alert("Ce mail a déjà été enregistré, l'utilisateur a dû recevoir un mail l'invitant à s'inscrire.") // Coder possibilité de renvoyer un mail ici
+                alert("Ce mail a déjà été enregistré, l'utilisateur a dû recevoir un mail l'invitant à s'inscrire.") 
             } else {
                 if( $("#displayIf").css("display") == "block" ){
                     db.collection(grade).doc(email).set({
@@ -380,20 +552,28 @@ function disconnect(event){
 function addCourse(event){
     event.preventDefault()
 
-    const classe = $("#classCourse").val()
-    const matière = $("#matière").val()
+    const classe = $("#classCourse").val().toLowerCase()
+    const matière = $("#matière").val().toLowerCase()
+    const prof = $("#enseignant").val()
+    const date = $("#date").val()
     const start = $("#start").val()
     const end = $("#end").val()
 
-    db.collection("Cours").doc().set({
-        Classe: classe,
+    let oldDate = date.split("/")
+    oldDate.reverse()
+    let newDate = oldDate.join("-")
+
+    db.collection("Cours").doc(classe).collection("All").doc(newDate+" "+start).set({
+        Date: date,
         Matière: matière,
+        Enseignant: prof,
         Début: start,
         Fin: end
     }).then(function(){
         alert("Cours ajouté !")
         $("#classCourse").val("")
         $("#matière").val("")
+        $("#date").val("")
         $("#start").val("")
         $("#end").val("")
     })
@@ -465,5 +645,3 @@ firebase.auth().onAuthStateChanged(function(user) {
       console.log("Aucun utilisateur connecté")
     }
 });
-
-
