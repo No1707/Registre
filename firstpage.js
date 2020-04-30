@@ -44,4 +44,4 @@ firebase.auth().onAuthStateChanged(function(user) {
 
   window.setTimeout(function(){
     location.replace("registre.html")
-  }, 7000)
+  }, 5000)

@@ -77,7 +77,10 @@ button:hover{
     
 #selectClassesCalendar{
     width: 70%;
-    height: 40%;
+    height: 40%;  
+}
+#selectClassesCalendar:focus, #selectClassesCalendar:active, #selectClassesCalendar:hover{
+    outline: none;
 }
 
     /* autres boutons */
@@ -157,14 +160,28 @@ button:hover{
     width: 100%;
     text-align: center;
 }
+.courseStudents{
+    padding: 100px 0 0 0;
+}
 .courseFoot{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
     margin-top: 50px;
     margin-bottom: 15px;
 }
 .courseFoot button{
-    margin: 0 20px;
+    margin: 10px 20px;
+    width: 50%;
+}
+#lateTag{
+    display: none;
+}
+#lateDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Section 2 */

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>NS Registre</title>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <link rel="icon" href="./lib/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="registre.css">
@@ -29,7 +30,7 @@
         </div>
         <div class="navbarL">
             <div class="navBtns">
-              <select name="" id="selectClassesCalendar" class="form-control neumorph">
+              <select name="" id="selectClassesCalendar" class="neumorph">
                 <option value="ClassSelect">Sélect. Classe</option>
               </select>
             </div>
@@ -66,8 +67,9 @@
       </ul>
       
 
-    <!-- calendrier -->
     <section class="main">
+
+      <!-- div absences / retard  -->
       <div class="courseInfos">
         <div class="courseHead">
           <div id="displayMat"></div>
@@ -88,11 +90,15 @@
           </table>
         </div>
         <div class="courseFoot">
-          <button class="btn btn-primary adminDisplay" id="courseInfosConf">Confirmer</button>
           <button class="btn btn-primary" id="closeW">Fermer</button>
+          <button class="btn btn-success" id="courseInfosConf">Confirmer</button>
+          <button class="btn btn-danger adminDisplay" id="deleteCourse">Supprimer le cours</button>
+          <button class="btn btn-warning" id="lateTag">Prévenir d'un retard</button>
+          <div id="lateDiv"></div>
         </div>
       </div>
       
+      <!-- calendrier -->
       <div id="calendrier"></div>
 
     </section>

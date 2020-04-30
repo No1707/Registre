@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion NS Registre</title>
+    <link rel="icon" href="./lib/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="connexion.css">
+</head>
+<body>
+    
+    <div class="connexion neumorph">
+        
+        <form id="checkMail">
+            
+            <div class="form">
+                <input id="Cemail" type="email" name="Email" required >
+                <label for="Email" class="labelName">
+                    <span class="contentName" id="mailSpan">Email</span>
+                </label>
+            </div>
+            <button id="checkMailBtn" class="checkBtns">Confirmer</button>
+
+        </form>
+
+        <form id="signedUp">
+
+            <div class="form">
+                <input type="password" name="Password" required id="signedUpPass">
+                <label for="Password" class="labelName">
+                    <span class="contentName">Password</span>
+                </label>
+            </div>
+            <button class="checkBtns">Connexion</button>
+
+        </form>
+
+        <form id="notSignedUp">
+            <h5>C'est votre première connexion, veuillez entrer un nouveau mot de passe afin de créer un compte</h5>
+
+            <div class="form">
+                <input type="password" name="Password" required id="notSignedUpPass">
+                <label for="Password" class="labelName">
+                    <span class="contentName">Password</span>
+                </label>
+            </div>
+            <div class="form">
+                <input type="password" name="Password" required id="notSignedUpPass2">
+                <label for="Password" class="labelName">
+                    <span class="contentName">Confirm password</span>
+                </label>
+            </div>
+            <button class="checkBtns">Créé compte</button>
+
+        </form>
+
+    </div>
+
+    <!-- Font awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <!-- jQuery et Bootstrap-->
+    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- SDK Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+    <script src="connexion.js"></script>
+
+</body>
+</html>
